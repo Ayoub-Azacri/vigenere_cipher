@@ -28,16 +28,30 @@ def brute_force_crypted_text(crypted_text):
 
 
 # chiffrement vigenere
-#def vigenere_cipher(text, mot_de_passe)
+def vigenere_cipher(text, password):
+    #?convert password to list of keys
+    list_of_keys = [ord(char) for char in password]
+    crypted_text = ""
+    #chiffre char by char
+    for index, char in enumerate(text):
+        current_key = list_of_keys[index % len(list_of_keys)]
+        crypted_char = cesar_cipher(text=char, key=current_key)
+        crypted_text += crypted_char
+
+    return crypted_text
 
 
-crypted_text = cesar_cipher(text, key)
-initial_text = cesar_cipher(text=crypted_text,key = 3_000_000, cipher = False)
-print(f"Given text:{initial_text}")
-print(f"Crypted text: {crypted_text}")
 
-brute_force_crypted_text(crypted_text)
+#crypted_text = cesar_cipher(text, key)
+#initial_text = cesar_cipher(text=crypted_text,key = 3_000_000, cipher = False)
+#print(f"Given text:{initial_text}")
+#print(f"Crypted text: {crypted_text}")
 
+#brute_force_crypted_text(crypted_text)
+
+crypted_text = vigenere_cipher(text= "Bonjour tout le monde ", password="Azerty123!")
+
+print(crypted_text)
 
 
 
